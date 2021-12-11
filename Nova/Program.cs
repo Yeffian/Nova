@@ -55,11 +55,6 @@ namespace Nova
             }
         }
 
-        static void HandleReplCommands(string command)
-        {
-            
-        }
-
         static void PrettyPrint(Node node, string indent = "", bool isLast = true)
         {
             string marker = isLast ? TreeLastString : TreeNotLastString;
