@@ -15,33 +15,33 @@ namespace Nova.CodeAnalysis
             _root = root;
         }
 
-        public int Evaluate()
+        public float Evaluate()
         {
             return EvaluateExpr(_root);
         }
 
-        private int EvaluateExpr(Expr node)
+        private float EvaluateExpr(Expr node)
         {
             // Number Expressions - 1
             if (node is NumberExpr n)
-                return (int)n.NumberToken.Value;
+                return (float)n.NumberToken.Value;
 
             // Binary Expressions - 1 + 2
             if (node is BinaryExpr b)
             {
-                int left = EvaluateExpr(b.Left);
-                int right = EvaluateExpr(b.Right);
+                int left = (int)EvaluateExpr(b.Left);
+                int right = (int)EvaluateExpr(b.Right);
 
                 switch (b.OperatorToken.Type)
                 {
                     case SyntaxKind.Plus:
-                        return left + right;
+                        return (float)left + right;
                     case SyntaxKind.Minus:
-                        return left - right;
+                        return (float)left - right;
                     case SyntaxKind.Asterisk:
-                        return left * right;
+                        return (float)left * right;
                     case SyntaxKind.Slash:
-                        return left / right;
+                        return (float)left / right;
                     default:
                         throw new Exception($"unexpected operator {b.OperatorToken.Type}");
                         
