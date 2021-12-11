@@ -65,24 +65,19 @@ namespace Nova.CodeAnalysis
             return new Token(kind, Current.Position, null, null);
         }
 
-        public SyntaxTree Parse()
+        private Expr ParseExpr(int parentPrecedence = 0)
         {
-            Expr expr = ParseTerm();
-            Token endOfFile = Match(SyntaxKind.EndOfFile);
+            Expr left = ParsePrimaryExpr();
 
-            return new SyntaxTree(_diagnostics, expr, endOfFile);
-        }
-
-        private Expr ParseTerm()
-        {
-            var left = ParseFactor();
-
-            while (Current.Type == SyntaxKind.Plus
-                  || Current.Type == SyntaxKind.Minus)
+            while (true)
             {
-                Token operatorToken = NextToken();
+                int precedence = GetBinaryOperatorPrecedence(Current.Type);
 
-                var right = ParseFactor();
+                if (precedence == 0 || precedence <= parentPrecedence)
+                    break;
+
+                Token operatorToken = NextToken();
+                Expr right = ParseExpr(precedence);
 
                 left = new BinaryExpr(left, operatorToken, right);
             }
@@ -90,25 +85,20 @@ namespace Nova.CodeAnalysis
             return left;
         }
 
-        private Expr ParseFactor()
+        private int GetBinaryOperatorPrecedence(SyntaxKind kind)
         {
-            var left = ParsePrimaryExpr();
-
-            while (Current.Type == SyntaxKind.Asterisk
-                  || Current.Type == SyntaxKind.Slash)
+            switch (kind)
             {
-                Token operatorToken = NextToken();
-
-                var right = ParsePrimaryExpr();
-
-                left = new BinaryExpr(left, operatorToken, right);
+                case SyntaxKind.Asterisk:
+                case SyntaxKind.Slash:
+                    return 2;
+                case SyntaxKind.Plus:
+                case SyntaxKind.Minus:
+                    return 1;
+                default:
+                    return 0;
             }
-
-            return left;
         }
-
-        private Expr ParseExpr() => ParseTerm();
-
 
         private Expr ParsePrimaryExpr()
         {
@@ -125,6 +115,14 @@ namespace Nova.CodeAnalysis
             var numberToken = Match(SyntaxKind.Number);
 
             return new NumberExpr(numberToken); 
+        }
+
+        public SyntaxTree Parse()
+        {
+            Expr expr = ParseExpr();
+            Token endOfFile = Match(SyntaxKind.EndOfFile);
+
+            return new SyntaxTree(_diagnostics, expr, endOfFile);
         }
     }
 }
