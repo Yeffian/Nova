@@ -6,6 +6,24 @@ using System.Threading.Tasks;
 
 namespace Nova.CodeAnalysis
 {
+    internal static class SyntaxFacts
+    {
+        public static int GetBinaryOperatorPrecedence(this SyntaxKind kind)
+        {
+            switch (kind)
+            {
+                case SyntaxKind.Asterisk:
+                case SyntaxKind.Slash:
+                    return 2;
+                case SyntaxKind.Plus:
+                case SyntaxKind.Minus:
+                    return 1;
+                default:
+                    return 0;
+            }
+        }
+    }
+
     public class NovaParser
     {
         private readonly Token[] _tokens;
@@ -71,7 +89,7 @@ namespace Nova.CodeAnalysis
 
             while (true)
             {
-                int precedence = GetBinaryOperatorPrecedence(Current.Type);
+                int precedence = Current.Type.GetBinaryOperatorPrecedence();
 
                 if (precedence == 0 || precedence <= parentPrecedence)
                     break;
@@ -83,21 +101,6 @@ namespace Nova.CodeAnalysis
             }
 
             return left;
-        }
-
-        private int GetBinaryOperatorPrecedence(SyntaxKind kind)
-        {
-            switch (kind)
-            {
-                case SyntaxKind.Asterisk:
-                case SyntaxKind.Slash:
-                    return 2;
-                case SyntaxKind.Plus:
-                case SyntaxKind.Minus:
-                    return 1;
-                default:
-                    return 0;
-            }
         }
 
         private Expr ParsePrimaryExpr()
