@@ -3,7 +3,7 @@ using Nova.CodeAnalysis;
 
 namespace Nova
 {
-    internal class Program
+    internal static class Program
     { 
         private const string TreeVerticalString = "│";
         private const string TreeNotLastString = "├──";
@@ -11,7 +11,7 @@ namespace Nova
 
         private static bool showTree = true;
 
-        public static void Main(string[] args)
+        public static void Main()
         {
             while (true)
             {

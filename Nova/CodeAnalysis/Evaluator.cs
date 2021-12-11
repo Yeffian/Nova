@@ -29,8 +29,8 @@ namespace Nova.CodeAnalysis
             // Binary Expressions - 1 + 2
             if (node is BinaryExpr b)
             {
-                int left = (int)EvaluateExpr(b.Left);
-                int right = (int)EvaluateExpr(b.Right);
+                float right = EvaluateExpr(b.Left);
+                float left = EvaluateExpr(b.Right);
 
                 switch (b.OperatorToken.Type)
                 {

@@ -57,25 +57,29 @@ namespace Nova.CodeAnalysis
             }
 
             // Operators and Whitespace
-            if (Char.IsWhiteSpace(_curr))
-                return new Token(SyntaxKind.Whitespace, _pos++, String.Empty, null);
-            else if (_curr == '+')
-                return new Token(SyntaxKind.Plus, _pos++, "+", null);
-            else if (_curr == '-')
-                return new Token(SyntaxKind.Minus, _pos++, "-", null);
-            else if (_curr == '*')
-                return new Token(SyntaxKind.Asterisk, _pos++, "*", null);
-            else if (_curr == '/')
-                return new Token(SyntaxKind.Slash, _pos++, "/", null);
-            else if (_curr == '(')
-                return new Token(SyntaxKind.OpenParen, _pos++, "(", null);
-            else if (_curr == ')')
-                return new Token(SyntaxKind.CloseParen, _pos++, ")", null);
-            else
+
+            switch (_curr)
             {
-                _diagnostics.Add($"[ERR] Bad character in input: '{_curr}'");
-                return new Token(SyntaxKind.Unknown, _pos++, _source.Substring(_pos - 1, 1), null);
+                case '+':
+                    return new Token(SyntaxKind.Plus, _pos++, "+", null);
+                case '-':
+                    return new Token(SyntaxKind.Minus, _pos++, "-", null);
+                case '*':
+                    return new Token(SyntaxKind.Asterisk, _pos++, "*", null);
+                case '/':
+                    return new Token(SyntaxKind.Slash, _pos++, "/", null);
+                case '(':
+                    return new Token(SyntaxKind.OpenParen, _pos++, "(", null);
+                case ')':
+                    return new Token(SyntaxKind.CloseParen, _pos++, ")", null);
+                case ' ':
+                case '\0':
+                case '\n':
+                    return new Token(SyntaxKind.Whitespace, _pos++, String.Empty, null);
             }
+
+            _diagnostics.Add($"[ERR] Bad character in input: '{_curr}'");
+            return new Token(SyntaxKind.Unknown, _pos++, _source.Substring(_pos - 1, 1), null);
         }
     }
 }
