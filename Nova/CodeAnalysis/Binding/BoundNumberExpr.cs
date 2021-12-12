@@ -1,15 +1,17 @@
-﻿namespace Nova.CodeAnalysis.Binding;
-
-internal sealed class BoundNumberExpr : BoundExpr
+﻿namespace Nova.CodeAnalysis.Binding
 {
-    
-    public BoundNumberExpr(object value)
+    internal sealed class BoundNumberExpr : BoundExpr
     {
-        Value = value;
-    }
     
-    public object Value { get; }
+        public BoundNumberExpr(object value)
+        {
+            Value = value;
+        }
+    
+        public object Value { get; }
 
-    public override BoundNodeKind Kind => BoundNodeKind.NumberExpr;
-    public override Type Type => Value.GetType();
+        public override BoundNodeKind Kind => BoundNodeKind.NumberExpr;
+        public override Type Type => Value.GetType();
+    }
 }
+

@@ -12,6 +12,8 @@
         Bang,
         DoubleAmpersand,
         DoublePipe,
+        DoubleEquals,
+        BangEquals,
         OpenParen,
         CloseParen,
         EndOfFile,
@@ -27,6 +29,5 @@
         BinaryExpr,
         ParenthesizedExpr,
         UnaryExpr,
-        
     }
 }

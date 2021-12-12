@@ -14,9 +14,12 @@ namespace Nova.CodeAnalysis.Syntax
             {
                 case SyntaxKind.Asterisk:
                 case SyntaxKind.Slash:
-                    return 4;
+                    return 5;
                 case SyntaxKind.Plus:
                 case SyntaxKind.Minus:
+                    return 4;
+                case SyntaxKind.DoubleEquals:
+                case SyntaxKind.BangEquals:
                     return 3;
                 case SyntaxKind.DoubleAmpersand:
                     return 2;
@@ -34,7 +37,7 @@ namespace Nova.CodeAnalysis.Syntax
                 case SyntaxKind.Plus:
                 case SyntaxKind.Minus:
                 case SyntaxKind.Bang:
-                    return 5;
+                    return 6;
                 default:
                     return 0;
             }

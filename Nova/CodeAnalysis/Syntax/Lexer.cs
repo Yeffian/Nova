@@ -22,7 +22,7 @@ namespace Nova.CodeAnalysis.Syntax
         private char Peek(int offset)
         {
             int index = _pos - offset;
-            
+
             if (index >= _source.Length)
                 return '\0';
 
@@ -92,14 +92,18 @@ namespace Nova.CodeAnalysis.Syntax
                 case ')':
                     return new Token(SyntaxKind.CloseParen, _pos++, ")", null);
                 case '!':
-                    return new Token(SyntaxKind.Bang, _pos++, "!", null);
+                   return new Token(SyntaxKind.Bang, _pos++, "!", null);
                 case '&':
                     if (Lookahead == '&')
                         return new Token(SyntaxKind.DoubleAmpersand, _pos += 2, "&&", null);
                     break;
                 case '|':
                     if (Lookahead == '|')
-                         return new Token(SyntaxKind.DoublePipe, _pos += 2, "||", null);
+                        return new Token(SyntaxKind.DoublePipe, _pos += 2, "||", null);
+                    break;
+                case '=':
+                    if (Lookahead == '=')
+                        return new Token(SyntaxKind.DoubleEquals, _pos += 2, "==", null);
                     break;
                 case ' ':
                 case '\0':

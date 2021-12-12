@@ -1,11 +1,14 @@
-﻿namespace Nova.CodeAnalysis.Binding;
-
-internal enum BoundBinaryOperatorKind
+﻿namespace Nova.CodeAnalysis.Binding 
 {
-    Addition,
-    Subtraction,
-    Multiplication,
-    Division,
-    LogicalAnd,
-    LogicalOr
+    internal enum BoundBinaryOperatorKind
+    {
+        Addition,
+        Subtraction,
+        Multiplication,
+        Division,
+        LogicalAnd,
+        LogicalOr,
+        Equality,
+    }
 }
+

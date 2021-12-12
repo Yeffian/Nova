@@ -1,18 +1,20 @@
-﻿namespace Nova.CodeAnalysis.Binding;
-
-internal sealed class BoundBinaryExpr : BoundExpr
+﻿namespace Nova.CodeAnalysis.Binding
 {
-    public BoundBinaryExpr(BoundExpr left, BoundBinaryOperatorKind operatorKind, BoundExpr right)
+    internal sealed class BoundBinaryExpr : BoundExpr
     {
-        Left = left;
-        OperatorKind = operatorKind;
-        Right = right;
-    }
+        public BoundBinaryExpr(BoundExpr left, BoundBinaryOperator op, BoundExpr right)
+        {
+            Left = left;
+            Op = op;
+            Right = right;
+        }
     
-    public BoundExpr Left { get; }
-    public BoundBinaryOperatorKind OperatorKind { get; }
-    public BoundExpr Right { get; }
+        public BoundExpr Left { get; }
+        public BoundBinaryOperator Op { get; }
+        public BoundExpr Right { get; }
 
-    public override BoundNodeKind Kind => BoundNodeKind.BinaryExpr;
-    public override Type Type => Left.Type;
+        public override BoundNodeKind Kind => BoundNodeKind.BinaryExpr;
+        public override Type Type => Op.ResultType;
+    }
 }
+

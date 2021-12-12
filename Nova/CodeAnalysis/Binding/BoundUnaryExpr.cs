@@ -8,16 +8,16 @@ namespace Nova.CodeAnalysis.Binding
 {
     internal class BoundUnaryExpr : BoundExpr
     {
-        public BoundUnaryExpr(BoundUnaryOperatorKind operatorKind, BoundExpr operand)
+        public BoundUnaryExpr(BoundUnaryOperator op, BoundExpr operand)
         {
-            OperatorKind = operatorKind;
+            Op = op;
             Operand = operand;
         }
         
-        public BoundUnaryOperatorKind OperatorKind { get; }
+        public BoundUnaryOperator Op { get; }
         public BoundExpr Operand { get; }
 
         public override BoundNodeKind Kind => BoundNodeKind.UnaryExpr;
-        public override Type Type => Operand.Type;
+        public override Type Type => Op.ResultType;
     }
 }
