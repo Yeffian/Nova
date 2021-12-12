@@ -18,7 +18,7 @@ namespace Nova.CodeAnalysis.Syntax
             CloseParenToken = closeParenToken;
         }
 
-        public override SyntaxKind Type => SyntaxKind.ParenthesizedExpr;
+        public override SyntaxKind Kind => SyntaxKind.ParenthesizedExpr;
 
         public Token OpenParenToken { get; }
         public Expr Expr { get; }

@@ -9,15 +9,15 @@ namespace Nova.CodeAnalysis.Syntax
     public class Token : Node
     {
 
-        public Token(SyntaxKind type, int position, string text, object value)
+        public Token(SyntaxKind kind, int position, string text, object value)
         {
-            Type = type;
+            Kind = kind;
             Position = position;
             Text = text;
             Value = value;
         }
 
-        public override SyntaxKind Type { get; }
+        public override SyntaxKind Kind { get; }
         public int Position { get; }
         public string Text { get; }
         public object Value { get; }

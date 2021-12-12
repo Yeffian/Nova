@@ -8,7 +8,7 @@ namespace Nova.CodeAnalysis.Syntax
 {
     public abstract class Node
     {
-        public abstract SyntaxKind Type { get; }
+        public abstract SyntaxKind Kind { get; }
 
         public abstract IEnumerable<Node> GetChildren(); 
     }

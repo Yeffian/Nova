@@ -35,5 +35,17 @@ namespace Nova.CodeAnalysis.Syntax
             }
         }
 
+        public static SyntaxKind GetKeywordKind(string text)
+        {
+            switch (text)
+            {
+                case "true":
+                    return SyntaxKind.True;
+                case "false":
+                    return SyntaxKind.False;
+                default:
+                    return SyntaxKind.Identifier;
+            }
+        }
     }
 }

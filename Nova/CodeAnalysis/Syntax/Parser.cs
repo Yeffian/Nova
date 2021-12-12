@@ -27,8 +27,8 @@ namespace Nova.CodeAnalysis.Syntax
             {
                 token = lexer.NextToken();
 
-                if (token.Type != SyntaxKind.Whitespace && token.Type != SyntaxKind.Unknown) tokens.Add(token);
-            } while (token.Type != SyntaxKind.EndOfFile);
+                if (token.Kind != SyntaxKind.Whitespace && token.Kind != SyntaxKind.Unknown) tokens.Add(token);
+            } while (token.Kind != SyntaxKind.EndOfFile);
 
             _tokens = tokens.ToArray();
             
@@ -57,7 +57,7 @@ namespace Nova.CodeAnalysis.Syntax
 
         private Token Match(SyntaxKind kind)
         {
-            if (Current.Type == kind)
+            if (Current.Kind == kind)
                 return NextToken();
 
             _diagnostics.Add($"[ERR] Unexpected token <{Current}>, expected <{kind}>.");
@@ -69,7 +69,7 @@ namespace Nova.CodeAnalysis.Syntax
         {
             Expr left;
 
-            int unaryPrecdence = Current.Type.GetUnaryOperatorPrecedence();
+            int unaryPrecdence = Current.Kind.GetUnaryOperatorPrecedence();
 
             if (unaryPrecdence != 0 && unaryPrecdence >= parentPrecedence)
             {
@@ -85,7 +85,7 @@ namespace Nova.CodeAnalysis.Syntax
 
             while (true)
             {
-                int precedence = Current.Type.GetBinaryOperatorPrecedence();
+                int precedence = Current.Kind.GetBinaryOperatorPrecedence();
 
                 if (precedence == 0 || precedence <= parentPrecedence)
                     break;
@@ -101,19 +101,31 @@ namespace Nova.CodeAnalysis.Syntax
 
         private Expr ParsePrimaryExpr()
         {
-            if (Current.Type == SyntaxKind.OpenParen)
+            switch (Current.Kind)
             {
-                var left = NextToken();
-                var expr = ParseExpr();
-                var right = Match(SyntaxKind.CloseParen);
+                case SyntaxKind.OpenParen:
+                {
+                    var left = NextToken();
+                    var expr = ParseExpr();
+                    var right = Match(SyntaxKind.CloseParen);
 
-                return new ParenthesizedExpr(left, expr, right);
+                    return new ParenthesizedExpr(left, expr, right);
+                }
+                case SyntaxKind.True:
+                case SyntaxKind.False:
+                {
+                    Token keywordToken = NextToken();
+                    bool value = Current.Kind == SyntaxKind.True;
+
+                    return new NumberExpr(keywordToken, value);
+                }
+                default:
+                {
+                    var numberToken = Match(SyntaxKind.Number);
+
+                    return new NumberExpr(numberToken);
+                }
             }
-
-
-            var numberToken = Match(SyntaxKind.Number);
-
-            return new NumberExpr(numberToken); 
         }
 
         public SyntaxTree Parse()

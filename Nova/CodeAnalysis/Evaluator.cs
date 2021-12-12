@@ -17,23 +17,20 @@ namespace Nova.CodeAnalysis
             _root = root;
         }
 
-        public int Evaluate()
+        public object Evaluate()
         {
             return EvaluateExpr(_root);
         }
 
-        private int EvaluateExpr(BoundExpr node)
+        private object EvaluateExpr(BoundExpr node)
         {
             // Number Expressions - 1
             if (node is BoundNumberExpr n)
-            {
-                Utilities.WriteLineAsColor(ConsoleColor.Yellow, n.Value);
-                return (int) n.Value;
-            }
+                return n.Value;
 
             if (node is BoundUnaryExpr u)
             {
-                int operand = EvaluateExpr(u.Operand);
+                int operand = (int) EvaluateExpr(u.Operand);
 
                 if (u.OperatorKind == BoundUnaryOperatorKind.Identity)
                     return +operand;
@@ -46,8 +43,8 @@ namespace Nova.CodeAnalysis
             // Binary Expressions - 1 + 2
             if (node is BoundBinaryExpr b)
             {
-                int right = EvaluateExpr(b.Left);
-                int left = EvaluateExpr(b.Right);
+                int right = (int) EvaluateExpr(b.Left);
+                int left = (int) EvaluateExpr(b.Right);
 
                 switch (b.OperatorKind)
                 {

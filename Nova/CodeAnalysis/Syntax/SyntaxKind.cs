@@ -13,11 +13,17 @@
         CloseParen,
         EndOfFile,
         Unknown,
+        
+        // Keywords
+        True,
+        False,
+        Identifier,
 
         // Expressions
         NumberExpr,
         BinaryExpr,
         ParenthesizedExpr,
-        UnaryExpr
+        UnaryExpr,
+        
     }
 }

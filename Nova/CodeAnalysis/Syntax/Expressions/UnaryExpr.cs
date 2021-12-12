@@ -16,7 +16,7 @@ namespace Nova.CodeAnalysis.Syntax
             Operand = operand;
         }
 
-        public override SyntaxKind Type => SyntaxKind.UnaryExpr;
+        public override SyntaxKind Kind => SyntaxKind.UnaryExpr;
 
         public Token OperatorToken { get; }
         public Expr Operand { get; }

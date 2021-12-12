@@ -69,7 +69,7 @@ namespace Nova
 
             Utilities.WriteAsColor(ConsoleColor.Green, indent);
             Utilities.WriteAsColor(ConsoleColor.Green, marker);
-            Utilities.WriteAsColor(ConsoleColor.Green, node.Type);
+            Utilities.WriteAsColor(ConsoleColor.Green, node.Kind);
 
             if (node is Token t && t.Value != null)
             {

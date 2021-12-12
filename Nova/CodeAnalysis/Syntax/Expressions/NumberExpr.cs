@@ -10,13 +10,17 @@ namespace Nova.CodeAnalysis.Syntax
     // 21, 3, 17, etc
     public sealed class NumberExpr : Expr
     {
-        public NumberExpr(Token numberToken)
+        public NumberExpr(Token numberToken, object value)
         {
             NumberToken = numberToken;
+            Value = value;
         }
         
-        public override SyntaxKind Type => SyntaxKind.NumberExpr;
+        public NumberExpr(Token numberToken) : this(numberToken, numberToken.Value) { }
+
+        public override SyntaxKind Kind => SyntaxKind.NumberExpr;
         public Token NumberToken { get; }
+        public object Value { get; }
 
         public override IEnumerable<Node> GetChildren()
         {

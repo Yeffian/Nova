@@ -17,7 +17,7 @@ namespace Nova.CodeAnalysis.Syntax
             Right = right;
         }
 
-        public override SyntaxKind Type => SyntaxKind.BinaryExpr;
+        public override SyntaxKind Kind => SyntaxKind.BinaryExpr;
 
         public Expr Left { get; }
         public Token OperatorToken { get; }

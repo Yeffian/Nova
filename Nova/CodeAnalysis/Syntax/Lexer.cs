@@ -40,6 +40,7 @@ namespace Nova.CodeAnalysis.Syntax
             if (_pos >= _source.Length)
                 return new Token(SyntaxKind.EndOfFile, _pos, "\0", null);
 
+            // Numbers
             if (Char.IsDigit(_curr))
             {
                 int start = _pos;
@@ -55,9 +56,24 @@ namespace Nova.CodeAnalysis.Syntax
 
                 return new Token(SyntaxKind.Number, start, text, value);
             }
+            
+            // Booleans
+            if (Char.IsLetter(_curr))
+            {
+                int start = _pos;
+                
+                while (Char.IsLetter(_curr))
+                    Advance();
+
+                int length = _pos - start;
+                string text = _source.Substring(start, length);
+
+                SyntaxKind kind = SyntaxFacts.GetKeywordKind(text);
+
+                return new Token(kind, _pos, text, null);
+            }
 
             // Operators and Whitespace
-
             switch (_curr)
             {
                 case '+':

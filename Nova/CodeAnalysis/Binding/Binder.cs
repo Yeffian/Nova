@@ -15,7 +15,7 @@ namespace Nova.CodeAnalysis.Binding
 
         public BoundExpr BindExpr(Expr expr)
         {
-            switch (expr.Type)
+            switch (expr.Kind)
             {
                 case SyntaxKind.NumberExpr:
                     return BindNumberExpr((NumberExpr) expr);
@@ -24,24 +24,24 @@ namespace Nova.CodeAnalysis.Binding
                 case SyntaxKind.BinaryExpr:
                     return BindBinaryExpr((BinaryExpr) expr);
                 default:
-                    throw new Exception($"Unexpected syntax {expr.Type}");
+                    throw new Exception($"Unexpected syntax {expr.Kind}");
             }
         }
 
         private BoundExpr BindNumberExpr(NumberExpr expr)
         {
-            var value = expr.NumberToken.Value as int? ?? 0;
+            var value = expr.Value ?? 0;
             return new BoundNumberExpr(value);
         }
 
         private BoundExpr BindUnaryExpr(UnaryExpr expr)
         {
             BoundExpr boundOperand = BindExpr(expr.Operand);
-            var boundOperatorKind = BindUnaryOperatorKind(expr.OperatorToken.Type, boundOperand.Type);
+            var boundOperatorKind = BindUnaryOperatorKind(expr.OperatorToken.Kind, boundOperand.Type);
 
             if (boundOperatorKind == null)
             {
-                _diagnostics.Add($"[ERR] Unary operator '{expr.OperatorToken.Text}' is not defined for type {boundOperand.Kind}");
+                _diagnostics.Add($"[ERR] Unary operator '{expr.OperatorToken.Text}' is not defined for type {boundOperand.Type}");
                 return boundOperand;
             }
 
@@ -52,11 +52,11 @@ namespace Nova.CodeAnalysis.Binding
         {
             BoundExpr boundLeft = BindExpr(expr.Left);
             BoundExpr boundRight = BindExpr(expr.Right);
-            var boundOperatorKind = BindBinaryOperatorKind(expr.OperatorToken.Type, boundLeft.Type, boundRight.Type);
+            var boundOperatorKind = BindBinaryOperatorKind(expr.OperatorToken.Kind, boundLeft.Type, boundRight.Type);
             
             if (boundOperatorKind == null)
             {
-                _diagnostics.Add($"[ERR] Binary operator '{expr.OperatorToken.Text}' is not defined for types {boundLeft.Kind} and {boundRight.Kind}");
+                _diagnostics.Add($"[ERR] Binary operator '{expr.OperatorToken.Text}' is not defined for types {boundLeft.Type} and {boundRight.Type}");
                 return boundLeft;
             }
             
