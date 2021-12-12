@@ -2,6 +2,7 @@
 {
     public enum SyntaxKind
     {
+        // Tokens
         Number,
         Whitespace,
         Plus,
@@ -12,8 +13,11 @@
         CloseParen,
         EndOfFile,
         Unknown,
+
+        // Expressions
         NumberExpr,
         BinaryExpr,
-        ParenthesizedExpr
+        ParenthesizedExpr,
+        UnaryExpr
     }
 }

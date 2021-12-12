@@ -26,6 +26,18 @@ namespace Nova.CodeAnalysis
             if (node is NumberExpr n)
                 return (float)n.NumberToken.Value;
 
+            if (node is UnaryExpr u)
+            {
+                float operand = EvaluateExpr(u.Operand);
+
+                if (u.OperatorToken.Type == SyntaxKind.Plus)
+                    return +operand;
+                else if (u.OperatorToken.Type == SyntaxKind.Minus)
+                    return -operand;
+                else
+                    throw new Exception($"Unexpected unary operator {u.OperatorToken.Value}");
+            }
+
             // Binary Expressions - 1 + 2
             if (node is BinaryExpr b)
             {

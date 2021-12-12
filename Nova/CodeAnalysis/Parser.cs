@@ -22,6 +22,18 @@ namespace Nova.CodeAnalysis
                     return 0;
             }
         }
+
+        public static int GetUnaryOperatorPrecedence(this SyntaxKind kind)
+        {
+            switch (kind)
+            {
+                case SyntaxKind.Plus:
+                case SyntaxKind.Minus:
+                    return 3;
+                default:
+                    return 0;
+            }
+        }
     }
 
     public class NovaParser
@@ -85,7 +97,21 @@ namespace Nova.CodeAnalysis
 
         private Expr ParseExpr(int parentPrecedence = 0)
         {
-            Expr left = ParsePrimaryExpr();
+            Expr left;
+
+            int unaryPrecdence = Current.Type.GetUnaryOperatorPrecedence();
+
+            if (unaryPrecdence != 0 && unaryPrecdence >= parentPrecedence)
+            {
+                Token operatorToken = NextToken();
+                Expr operand = ParseExpr(unaryPrecdence);
+
+                left = new UnaryExpr(operatorToken, operand);
+            }
+            else
+            {
+                left = ParsePrimaryExpr();
+            }
 
             while (true)
             {
