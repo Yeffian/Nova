@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Reflection;
 using Nova.CodeAnalysis;
+using Nova.CodeAnalysis.Binding;
+using Nova.CodeAnalysis.Syntax;
+using Binder = Nova.CodeAnalysis.Binding.Binder;
 
 namespace Nova
 {
@@ -37,18 +41,22 @@ namespace Nova
                 }
 
                 SyntaxTree syntaxTree = SyntaxTree.Parse(line);
+                Binder binder = new Binder();
+                BoundExpr boundExpr = binder.BindExpr(syntaxTree.Root);
+
+                string[] diagnostics = binder.Diagnostics.Concat(syntaxTree.Diagnostics).ToArray();
 
                 if (showTree)
                     PrettyPrint(syntaxTree.Root);
 
-                if (syntaxTree.Diagnostics.Any())
+                if (binder.Diagnostics.Any())
                 {
-                    foreach (string diagnostic in syntaxTree.Diagnostics)
+                    foreach (string diagnostic in diagnostics)
                         Utilities.WriteLineAsColor(ConsoleColor.Red, diagnostic);
                 }
                 else
                 {
-                    Evaluator e = new Evaluator(syntaxTree.Root);
+                    Evaluator e = new Evaluator(boundExpr);
 
                     Utilities.WriteLineAsColor(ConsoleColor.DarkGray, e.Evaluate());
                 }

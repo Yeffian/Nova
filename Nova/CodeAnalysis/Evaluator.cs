@@ -1,68 +1,69 @@
-﻿using System;
+﻿using Nova.CodeAnalysis.Syntax;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Nova.CodeAnalysis.Binding;
 
 namespace Nova.CodeAnalysis
 {
-    public class Evaluator
+    internal class Evaluator
     {
-        private readonly Expr _root;
+        private readonly BoundExpr _root;
 
-        public Evaluator(Expr root)
+        public Evaluator(BoundExpr root)
         {
             _root = root;
         }
 
-        public float Evaluate()
+        public int Evaluate()
         {
             return EvaluateExpr(_root);
         }
 
-        private float EvaluateExpr(Expr node)
+        private int EvaluateExpr(BoundExpr node)
         {
             // Number Expressions - 1
-            if (node is NumberExpr n)
-                return (float)n.NumberToken.Value;
-
-            if (node is UnaryExpr u)
+            if (node is BoundNumberExpr n)
             {
-                float operand = EvaluateExpr(u.Operand);
+                Utilities.WriteLineAsColor(ConsoleColor.Yellow, n.Value);
+                return (int) n.Value;
+            }
 
-                if (u.OperatorToken.Type == SyntaxKind.Plus)
+            if (node is BoundUnaryExpr u)
+            {
+                int operand = EvaluateExpr(u.Operand);
+
+                if (u.OperatorKind == BoundUnaryOperatorKind.Identity)
                     return +operand;
-                else if (u.OperatorToken.Type == SyntaxKind.Minus)
+                else if (u.OperatorKind == BoundUnaryOperatorKind.Negation)
                     return -operand;
                 else
-                    throw new Exception($"Unexpected unary operator {u.OperatorToken.Value}");
+                    throw new Exception($"Unexpected unary operator {u.OperatorKind}");
             }
 
             // Binary Expressions - 1 + 2
-            if (node is BinaryExpr b)
+            if (node is BoundBinaryExpr b)
             {
-                float right = EvaluateExpr(b.Left);
-                float left = EvaluateExpr(b.Right);
+                int right = EvaluateExpr(b.Left);
+                int left = EvaluateExpr(b.Right);
 
-                switch (b.OperatorToken.Type)
+                switch (b.OperatorKind)
                 {
-                    case SyntaxKind.Plus:
-                        return (float)left + right;
-                    case SyntaxKind.Minus:
-                        return (float)left - right;
-                    case SyntaxKind.Asterisk:
-                        return (float)left * right;
-                    case SyntaxKind.Slash:
-                        return (float)left / right;
+                    case BoundBinaryOperatorKind.Addition:
+                        return left + right;
+                    case BoundBinaryOperatorKind.Subtraction:
+                        return left - right;
+                    case BoundBinaryOperatorKind.Multiplication:
+                        return left * right;
+                    case BoundBinaryOperatorKind.Division:
+                        return left / right;
                     default:
-                        throw new Exception($"unexpected operator {b.OperatorToken.Type}");
+                        throw new Exception($"unexpected operator {b.OperatorKind}");
                         
                 }
             }
-
-            // Parenthesized Expressions - (1 + 2)
-            if (node is ParenthesizedExpr p)
-                 return EvaluateExpr(p.Expr);
 
             throw new Exception($"Unexpected node {node.Type}");
         }

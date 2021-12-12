@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nova.CodeAnalysis
+namespace Nova.CodeAnalysis.Syntax
 {
     // Unary expressions are expressions with a leading operator, and an expression, such as
     // -1, -(2 * 2), etc

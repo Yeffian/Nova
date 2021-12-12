@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nova.CodeAnalysis
+namespace Nova.CodeAnalysis.Syntax
 {
     // A binary expression consists of two expressions on the left and right, and one operator in the middle, such as
     // 1 + 2, (2 * 3) + (4 / 2)

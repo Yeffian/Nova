@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nova.CodeAnalysis
+namespace Nova.CodeAnalysis.Syntax
 {
     // Any number, such as
     // 21, 3, 17, etc

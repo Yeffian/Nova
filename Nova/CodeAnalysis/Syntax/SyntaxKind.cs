@@ -1,4 +1,4 @@
-﻿namespace Nova.CodeAnalysis
+﻿namespace Nova.CodeAnalysis.Syntax
 {
     public enum SyntaxKind
     {

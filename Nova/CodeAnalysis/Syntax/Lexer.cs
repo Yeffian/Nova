@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nova.CodeAnalysis
+namespace Nova.CodeAnalysis.Syntax
 {
     public class NovaLexer
     {
@@ -50,7 +50,7 @@ namespace Nova.CodeAnalysis
                 int length = _pos - start;
                 string text = _source.Substring(start, length);
 
-                if (!(float.TryParse(text, out var value)))
+                if (!(Int32.TryParse(text, out var value)))
                     _diagnostics.Add($"[ERR] The number {_curr} cannot be represented as a Float32.");
 
                 return new Token(SyntaxKind.Number, start, text, value);
