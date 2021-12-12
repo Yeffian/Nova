@@ -65,38 +65,58 @@ namespace Nova.CodeAnalysis.Binding
 
         private BoundBinaryOperatorKind? BindBinaryOperatorKind(SyntaxKind kind, Type leftType, Type rightType)
         {
-            if (leftType != typeof(int) || rightType != typeof(int))
-                return null;
-
-            switch (kind)
+            if (leftType == typeof(int) && rightType == typeof(int))
             {
-                case SyntaxKind.Plus:
-                    return BoundBinaryOperatorKind.Addition;
-                case SyntaxKind.Minus:
-                    return BoundBinaryOperatorKind.Subtraction;
-                case SyntaxKind.Asterisk:
-                    return BoundBinaryOperatorKind.Multiplication;
-                case SyntaxKind.Slash:
-                    return BoundBinaryOperatorKind.Division;
-                default:
-                    throw new Exception($"Unexpected unary operator {kind}");
+                switch (kind)
+                {
+                    case SyntaxKind.Plus:
+                        return BoundBinaryOperatorKind.Addition;
+                    case SyntaxKind.Minus:
+                        return BoundBinaryOperatorKind.Subtraction;
+                    case SyntaxKind.Asterisk:
+                        return BoundBinaryOperatorKind.Multiplication;
+                    case SyntaxKind.Slash:
+                        return BoundBinaryOperatorKind.Division;
+                }
             }
+
+            if (leftType == typeof(bool) && rightType == typeof(bool))
+            {
+                switch (kind)
+                {
+                    case SyntaxKind.DoubleAmpersand:
+                        return BoundBinaryOperatorKind.LogicalAnd;
+                    case SyntaxKind.DoublePipe:
+                        return BoundBinaryOperatorKind.LogicalOr;
+                }
+            }
+
+            return null;
         }
         
         private BoundUnaryOperatorKind? BindUnaryOperatorKind(SyntaxKind kind, Type operandType)
         {
-            if (operandType != typeof(int))
-                return null;
-
-            switch (kind)
+            if (operandType == typeof(int))
             {
-                case SyntaxKind.Plus:
-                    return BoundUnaryOperatorKind.Identity;
-                case SyntaxKind.Minus:
-                    return BoundUnaryOperatorKind.Negation;
-                default:
-                    throw new Exception($"Unexpected unary operator {kind}");
+                switch (kind)
+                {
+                    case SyntaxKind.Plus:
+                        return BoundUnaryOperatorKind.Identity;
+                    case SyntaxKind.Minus:
+                        return BoundUnaryOperatorKind.Negation;
+                }
             }
+
+            if (operandType == typeof(bool))
+            {
+                switch (kind)
+                {
+                    case SyntaxKind.Bang:
+                        return BoundUnaryOperatorKind.LogicalNot;
+                }
+            }
+
+            return null;
         }
     }
 }

@@ -3,5 +3,6 @@
 public enum BoundUnaryOperatorKind
 {
     Identity, 
-    Negation
+    Negation,
+    LogicalNot
 }

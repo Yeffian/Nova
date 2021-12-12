@@ -9,11 +9,14 @@
         Minus,
         Asterisk,
         Slash,
+        Bang,
+        DoubleAmpersand,
+        DoublePipe,
         OpenParen,
         CloseParen,
         EndOfFile,
         Unknown,
-        
+
         // Keywords
         True,
         False,

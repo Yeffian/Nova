@@ -115,7 +115,7 @@ namespace Nova.CodeAnalysis.Syntax
                 case SyntaxKind.False:
                 {
                     Token keywordToken = NextToken();
-                    bool value = Current.Kind == SyntaxKind.True;
+                    bool value = keywordToken.Kind == SyntaxKind.True;
 
                     return new NumberExpr(keywordToken, value);
                 }

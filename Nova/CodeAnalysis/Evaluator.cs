@@ -30,32 +30,41 @@ namespace Nova.CodeAnalysis
 
             if (node is BoundUnaryExpr u)
             {
-                int operand = (int) EvaluateExpr(u.Operand);
+                var operand = EvaluateExpr(u.Operand);
 
-                if (u.OperatorKind == BoundUnaryOperatorKind.Identity)
-                    return +operand;
-                else if (u.OperatorKind == BoundUnaryOperatorKind.Negation)
-                    return -operand;
-                else
-                    throw new Exception($"Unexpected unary operator {u.OperatorKind}");
+                switch (u.OperatorKind)
+                {
+                    case BoundUnaryOperatorKind.Identity:
+                        return (int) operand;
+                    case BoundUnaryOperatorKind.Negation:
+                        return -(int) operand;
+                    case BoundUnaryOperatorKind.LogicalNot:
+                        return !(bool) operand;
+                    default:
+                        throw new Exception($"Unexpected unary operator {u.OperatorKind}");
+                }
             }
 
             // Binary Expressions - 1 + 2
             if (node is BoundBinaryExpr b)
             {
-                int right = (int) EvaluateExpr(b.Left);
-                int left = (int) EvaluateExpr(b.Right);
+                var right = EvaluateExpr(b.Left);
+                var left = EvaluateExpr(b.Right);
 
                 switch (b.OperatorKind)
                 {
                     case BoundBinaryOperatorKind.Addition:
-                        return left + right;
+                        return (int) left + (int) right;
                     case BoundBinaryOperatorKind.Subtraction:
-                        return left - right;
+                        return (int) left - (int) right;
                     case BoundBinaryOperatorKind.Multiplication:
-                        return left * right;
+                        return (int) left * (int) right;
                     case BoundBinaryOperatorKind.Division:
-                        return left / right;
+                        return (int) left / (int) right;
+                    case BoundBinaryOperatorKind.LogicalAnd:
+                        return (bool) left && (bool) right;
+                    case BoundBinaryOperatorKind.LogicalOr:
+                        return (bool) left || (bool) right;
                     default:
                         throw new Exception($"unexpected operator {b.OperatorKind}");
                         
