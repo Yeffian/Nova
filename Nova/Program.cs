@@ -8,11 +8,7 @@ using Binder = Nova.CodeAnalysis.Binding.Binder;
 namespace Nova
 {
     internal static class Program
-    { 
-        private const string TreeVerticalString = "│";
-        private const string TreeNotLastString = "├──";
-        private const string TreeLastString = "└──";
-
+    {
         private static bool showTree = true;
 
         public static void Main()
@@ -47,7 +43,7 @@ namespace Nova
                 string[] diagnostics = binder.Diagnostics.Concat(syntaxTree.Diagnostics).ToArray();
 
                 if (showTree)
-                    PrettyPrint(syntaxTree.Root);
+                    syntaxTree.Root.PrettyPrint();
 
                 if (binder.Diagnostics.Any())
                 {
@@ -61,29 +57,6 @@ namespace Nova
                     Utilities.WriteLineAsColor(ConsoleColor.DarkGray, e.Evaluate());
                 }
             }
-        }
-
-        static void PrettyPrint(Node node, string indent = "", bool isLast = true)
-        {
-            string marker = isLast ? TreeLastString : TreeNotLastString;
-
-            Utilities.WriteAsColor(ConsoleColor.Green, indent);
-            Utilities.WriteAsColor(ConsoleColor.Green, marker);
-            Utilities.WriteAsColor(ConsoleColor.Green, node.Kind);
-
-            if (node is Token t && t.Value != null)
-            {
-                Console.Write(" ");
-                Utilities.WriteAsColor(ConsoleColor.Green, t.Value);
-            }
-
-            Console.WriteLine();
-            indent += isLast ? "    " : $"{TreeVerticalString}    ";
-
-            Node last = node.GetChildren().LastOrDefault();
-
-            foreach (var child in node.GetChildren())
-                PrettyPrint(child, indent, child == last);
         }
     }
 }
