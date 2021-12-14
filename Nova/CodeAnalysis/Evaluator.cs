@@ -61,6 +61,10 @@ namespace Nova.CodeAnalysis
                         return (int) left * (int) right;
                     case BoundBinaryOperatorKind.Division:
                         return (int) left / (int) right;
+                    case BoundBinaryOperatorKind.GreaterThan:
+                        return (int) left > (int) right;
+                    case BoundBinaryOperatorKind.LessThan:
+                        return (int) left < (int) right;
                     case BoundBinaryOperatorKind.LogicalAnd:
                         return (bool) left && (bool) right;
                     case BoundBinaryOperatorKind.LogicalOr:

@@ -40,6 +40,10 @@ namespace Nova.CodeAnalysis.Binding
             // == for booleans and integers
             new BoundBinaryOperator(SyntaxKind.DoubleEquals, BoundBinaryOperatorKind.Equality, typeof(int), typeof(bool)),
             new BoundBinaryOperator(SyntaxKind.DoubleEquals, BoundBinaryOperatorKind.Equality, typeof(bool)),
+            
+            // greater than and less than
+            new BoundBinaryOperator(SyntaxKind.GreaterThan, BoundBinaryOperatorKind.GreaterThan, typeof(int), typeof(bool)),
+            new BoundBinaryOperator(SyntaxKind.LessThan, BoundBinaryOperatorKind.LessThan, typeof(int), typeof(bool))
         };
 
         public static BoundBinaryOperator Bind(SyntaxKind syntaxKind, Type leftType, Type rightType)

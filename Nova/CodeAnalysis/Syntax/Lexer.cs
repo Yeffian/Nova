@@ -91,6 +91,10 @@ namespace Nova.CodeAnalysis.Syntax
                     return new Token(SyntaxKind.OpenParen, _pos++, "(", null);
                 case ')':
                     return new Token(SyntaxKind.CloseParen, _pos++, ")", null);
+                case '>':
+                    return new Token(SyntaxKind.LessThan, _pos++, "<", null);
+                case '<':
+                    return new Token(SyntaxKind.GreaterThan, _pos++, ">", null);
                 case '&':
                     if (Lookahead == '&')
                         return new Token(SyntaxKind.DoubleAmpersand, _pos += 2, "&&", null);
