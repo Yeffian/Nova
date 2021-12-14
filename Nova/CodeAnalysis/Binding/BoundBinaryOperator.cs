@@ -37,9 +37,9 @@ namespace Nova.CodeAnalysis.Binding
             new BoundBinaryOperator(SyntaxKind.DoubleAmpersand, BoundBinaryOperatorKind.LogicalAnd, typeof(bool)),
             new BoundBinaryOperator(SyntaxKind.DoublePipe, BoundBinaryOperatorKind.LogicalOr, typeof(bool)),
             
-            // == and !=
+            // == for booleans and integers
             new BoundBinaryOperator(SyntaxKind.DoubleEquals, BoundBinaryOperatorKind.Equality, typeof(int), typeof(bool)),
-            new BoundBinaryOperator(SyntaxKind.DoubleEquals, BoundBinaryOperatorKind.Equality, typeof(bool), typeof(bool)),
+            new BoundBinaryOperator(SyntaxKind.DoubleEquals, BoundBinaryOperatorKind.Equality, typeof(bool)),
         };
 
         public static BoundBinaryOperator Bind(SyntaxKind syntaxKind, Type leftType, Type rightType)

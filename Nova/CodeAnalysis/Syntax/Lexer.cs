@@ -91,8 +91,6 @@ namespace Nova.CodeAnalysis.Syntax
                     return new Token(SyntaxKind.OpenParen, _pos++, "(", null);
                 case ')':
                     return new Token(SyntaxKind.CloseParen, _pos++, ")", null);
-                case '!':
-                   return new Token(SyntaxKind.Bang, _pos++, "!", null);
                 case '&':
                     if (Lookahead == '&')
                         return new Token(SyntaxKind.DoubleAmpersand, _pos += 2, "&&", null);
@@ -105,6 +103,8 @@ namespace Nova.CodeAnalysis.Syntax
                     if (Lookahead == '=')
                         return new Token(SyntaxKind.DoubleEquals, _pos += 2, "==", null);
                     break;
+                case '!':
+                    return new Token(SyntaxKind.Bang, _pos++, "!", null);
                 case ' ':
                 case '\0':
                 case '\n':
