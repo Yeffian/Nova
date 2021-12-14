@@ -9,6 +9,7 @@
         LogicalAnd,
         LogicalOr,
         Equality,
+        Inequality
     }
 }
 

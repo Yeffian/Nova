@@ -36,7 +36,10 @@ namespace Nova.CodeAnalysis.Binding
             new BoundBinaryOperator(SyntaxKind.Slash, BoundBinaryOperatorKind.Division, typeof(int)),
             new BoundBinaryOperator(SyntaxKind.DoubleAmpersand, BoundBinaryOperatorKind.LogicalAnd, typeof(bool)),
             new BoundBinaryOperator(SyntaxKind.DoublePipe, BoundBinaryOperatorKind.LogicalOr, typeof(bool)),
+            
+            // == and !=
             new BoundBinaryOperator(SyntaxKind.DoubleEquals, BoundBinaryOperatorKind.Equality, typeof(int), typeof(bool)),
+            new BoundBinaryOperator(SyntaxKind.DoubleEquals, BoundBinaryOperatorKind.Equality, typeof(bool), typeof(bool)),
         };
 
         public static BoundBinaryOperator Bind(SyntaxKind syntaxKind, Type leftType, Type rightType)
