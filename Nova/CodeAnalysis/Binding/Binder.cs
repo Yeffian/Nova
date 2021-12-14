@@ -17,6 +17,8 @@ namespace Nova.CodeAnalysis.Binding
         {
             switch (expr.Kind)
             {
+                case SyntaxKind.ParenthesizedExpr:
+                    return BindParenthisizedExpr((ParenthesizedExpr) expr);
                 case SyntaxKind.NumberExpr:
                     return BindNumberExpr((NumberExpr) expr);
                 case SyntaxKind.UnaryExpr:
@@ -27,6 +29,8 @@ namespace Nova.CodeAnalysis.Binding
                     throw new Exception($"Unexpected syntax {expr.Kind}");
             }
         }
+
+        private BoundExpr BindParenthisizedExpr(ParenthesizedExpr expr) => BindExpr(expr.Expr);
 
         private BoundExpr BindNumberExpr(NumberExpr expr)
         {
