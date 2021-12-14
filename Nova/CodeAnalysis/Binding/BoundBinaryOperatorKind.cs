@@ -10,7 +10,8 @@
         LogicalOr,
         Equality,
         GreaterThan,
-        LessThan
+        LessThan,
+        Exponent
     }
 }
 

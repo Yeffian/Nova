@@ -71,6 +71,8 @@ namespace Nova.CodeAnalysis
                         return (bool) left || (bool) right;
                     case BoundBinaryOperatorKind.Equality:
                         return Equals(left, right);
+                    case BoundBinaryOperatorKind.Exponent:
+                        return Math.Pow((int) right, (int) left);
                     default:
                         throw new Exception($"unexpected operator {b.Op}");
                         

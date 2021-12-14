@@ -10,6 +10,7 @@
         Asterisk,
         Slash,
         Bang,
+        Caret,
         GreaterThan,
         LessThan,
         DoubleAmpersand,

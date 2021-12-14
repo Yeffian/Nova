@@ -30,10 +30,15 @@ namespace Nova.CodeAnalysis.Binding
 
         private static BoundBinaryOperator[] _operators =
         {
+            // + and -
             new BoundBinaryOperator(SyntaxKind.Plus, BoundBinaryOperatorKind.Addition, typeof(int)),
             new BoundBinaryOperator(SyntaxKind.Minus, BoundBinaryOperatorKind.Subtraction, typeof(int)),
+            
+            // * and /
             new BoundBinaryOperator(SyntaxKind.Asterisk, BoundBinaryOperatorKind.Multiplication, typeof(int)),
             new BoundBinaryOperator(SyntaxKind.Slash, BoundBinaryOperatorKind.Division, typeof(int)),
+            
+            // && and ||
             new BoundBinaryOperator(SyntaxKind.DoubleAmpersand, BoundBinaryOperatorKind.LogicalAnd, typeof(bool)),
             new BoundBinaryOperator(SyntaxKind.DoublePipe, BoundBinaryOperatorKind.LogicalOr, typeof(bool)),
             
@@ -43,7 +48,9 @@ namespace Nova.CodeAnalysis.Binding
             
             // greater than and less than
             new BoundBinaryOperator(SyntaxKind.GreaterThan, BoundBinaryOperatorKind.GreaterThan, typeof(int), typeof(bool)),
-            new BoundBinaryOperator(SyntaxKind.LessThan, BoundBinaryOperatorKind.LessThan, typeof(int), typeof(bool))
+            new BoundBinaryOperator(SyntaxKind.LessThan, BoundBinaryOperatorKind.LessThan, typeof(int), typeof(bool)),
+            
+            new BoundBinaryOperator(SyntaxKind.Caret, BoundBinaryOperatorKind.Exponent, typeof(int), typeof(bool))
         };
 
         public static BoundBinaryOperator Bind(SyntaxKind syntaxKind, Type leftType, Type rightType)

@@ -12,6 +12,8 @@ namespace Nova.CodeAnalysis.Syntax
         {
             switch (kind)
             {
+                case SyntaxKind.Caret:
+                    return 7;
                 case SyntaxKind.Asterisk:
                 case SyntaxKind.Slash:
                     return 6;
@@ -39,7 +41,7 @@ namespace Nova.CodeAnalysis.Syntax
                 case SyntaxKind.Plus:
                 case SyntaxKind.Minus:
                 case SyntaxKind.Bang:
-                    return 6;
+                    return 8;
                 default:
                     return 0;
             }

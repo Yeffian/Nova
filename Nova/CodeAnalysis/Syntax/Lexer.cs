@@ -85,6 +85,8 @@ namespace Nova.CodeAnalysis.Syntax
                     return new Token(SyntaxKind.Minus, _pos++, "-", null);
                 case '*':
                     return new Token(SyntaxKind.Asterisk, _pos++, "*", null);
+                case '^':
+                    return new Token(SyntaxKind.Caret, _pos++, "^", null);
                 case '/':
                     return new Token(SyntaxKind.Slash, _pos++, "/", null);
                 case '(':
