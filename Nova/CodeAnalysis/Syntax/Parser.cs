@@ -41,7 +41,7 @@ namespace Nova.CodeAnalysis.Syntax
             int index = _pos - offset;
 
             if (index >= _tokens.Length)
-                return _tokens[_tokens.Length - 1];
+                return _tokens[^1];
 
             return _tokens[index];
         }
