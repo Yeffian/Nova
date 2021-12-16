@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nova", "Nova\Nova.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nv", "nv\nv.csproj", "{7DCC18DC-4B76-4FC4-8662-7A95926A2DF9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nova.Tests", "Nova.Tests\Nova.Tests.csproj", "{1CBC5EBF-ED0C-435B-9222-D914C3B31D1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7DCC18DC-4B76-4FC4-8662-7A95926A2DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DCC18DC-4B76-4FC4-8662-7A95926A2DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DCC18DC-4B76-4FC4-8662-7A95926A2DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CBC5EBF-ED0C-435B-9222-D914C3B31D1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CBC5EBF-ED0C-435B-9222-D914C3B31D1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CBC5EBF-ED0C-435B-9222-D914C3B31D1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CBC5EBF-ED0C-435B-9222-D914C3B31D1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
