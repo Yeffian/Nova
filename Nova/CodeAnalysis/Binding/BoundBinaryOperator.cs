@@ -2,7 +2,7 @@
 
 namespace Nova.CodeAnalysis.Binding
 {
-    internal sealed class BoundBinaryOperator
+    public sealed class BoundBinaryOperator
     {
 
 

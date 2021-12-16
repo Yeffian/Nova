@@ -7,7 +7,7 @@ using Nova.CodeAnalysis.Syntax;
 
 namespace Nova.CodeAnalysis.Binding
 {
-    internal sealed class Binder
+    public sealed class Binder
     {
         private List<string> _diagnostics = new List<string>();
 

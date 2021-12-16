@@ -4,5 +4,5 @@ public enum BoundUnaryOperatorKind
 {
     Identity, 
     Negation,
-    LogicalNot
+    LogicalNot,
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nova.CodeAnalysis.Binding
 {
-    internal abstract class BoundExpr : BoundNode
+    public abstract class BoundExpr : BoundNode
     {
         public abstract Type Type { get; }
     }

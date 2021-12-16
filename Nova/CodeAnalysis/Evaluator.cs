@@ -8,7 +8,7 @@ using Nova.CodeAnalysis.Binding;
 
 namespace Nova.CodeAnalysis
 {
-    internal class Evaluator
+    public class Evaluator
     {
         private readonly BoundExpr _root;
 

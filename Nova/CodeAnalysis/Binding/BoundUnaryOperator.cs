@@ -2,7 +2,7 @@
 
 namespace Nova.CodeAnalysis.Binding
 {
-    internal sealed class BoundUnaryOperator
+    public sealed class BoundUnaryOperator
     {
         public BoundUnaryOperator(SyntaxKind syntaxKind, BoundUnaryOperatorKind kind, Type operandType, Type resultType)
         {
@@ -23,7 +23,7 @@ namespace Nova.CodeAnalysis.Binding
         {
             new BoundUnaryOperator(SyntaxKind.Bang, BoundUnaryOperatorKind.LogicalNot, typeof(bool)),
             new BoundUnaryOperator(SyntaxKind.Plus, BoundUnaryOperatorKind.Identity, typeof(int)),
-            new BoundUnaryOperator(SyntaxKind.Minus, BoundUnaryOperatorKind.Negation, typeof(int))
+            new BoundUnaryOperator(SyntaxKind.Minus, BoundUnaryOperatorKind.Negation, typeof(int)),
         };
 
         public static BoundUnaryOperator Bind(SyntaxKind syntaxKind, Type operandType)

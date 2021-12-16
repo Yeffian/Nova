@@ -1,6 +1,6 @@
 ﻿namespace Nova.CodeAnalysis.Binding
 {
-    internal enum BoundNodeKind
+    public enum BoundNodeKind
     {
         UnaryExpr,
         NumberExpr,

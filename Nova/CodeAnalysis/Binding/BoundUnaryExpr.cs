@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nova.CodeAnalysis.Binding
 {
-    internal class BoundUnaryExpr : BoundExpr
+    public class BoundUnaryExpr : BoundExpr
     {
         public BoundUnaryExpr(BoundUnaryOperator op, BoundExpr operand)
         {

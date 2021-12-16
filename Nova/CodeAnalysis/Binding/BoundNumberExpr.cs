@@ -1,6 +1,6 @@
 ﻿namespace Nova.CodeAnalysis.Binding
 {
-    internal sealed class BoundNumberExpr : BoundExpr
+    public sealed class BoundNumberExpr : BoundExpr
     {
     
         public BoundNumberExpr(object value)

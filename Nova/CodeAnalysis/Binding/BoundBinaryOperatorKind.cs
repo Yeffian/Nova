@@ -1,6 +1,6 @@
 ﻿namespace Nova.CodeAnalysis.Binding 
 {
-    internal enum BoundBinaryOperatorKind
+    public enum BoundBinaryOperatorKind
     {
         Addition,
         Subtraction,

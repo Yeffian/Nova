@@ -1,6 +1,6 @@
 ﻿namespace Nova.CodeAnalysis.Binding
 {
-    internal sealed class BoundBinaryExpr : BoundExpr
+    public sealed class BoundBinaryExpr : BoundExpr
     {
         public BoundBinaryExpr(BoundExpr left, BoundBinaryOperator op, BoundExpr right)
         {
