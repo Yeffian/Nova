@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Nova.CodeAnalysis.Syntax;
 
-namespace Nova
+namespace nv
 {
     public static class Utilities
     {

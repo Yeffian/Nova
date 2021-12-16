@@ -5,7 +5,7 @@ using Nova.CodeAnalysis.Binding;
 using Nova.CodeAnalysis.Syntax;
 using Binder = Nova.CodeAnalysis.Binding.Binder;
 
-namespace Nova
+namespace nv
 {
     internal static class Program
     {
