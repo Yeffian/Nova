@@ -35,6 +35,22 @@ namespace Nova
                     Console.Clear();
                     continue;
                 }
+                else if (line.ToLower() == "#help")
+                {
+                    Utilities.WriteLineAsColor(ConsoleColor.Yellow, "Nova Interpreter - Version 1.0.0");
+                    Console.WriteLine();
+                    Utilities.WriteLineAsColor(ConsoleColor.Yellow, "-------- COMMANDS --------");
+                    Console.WriteLine("     ");
+                    Utilities.WriteLineAsColor(ConsoleColor.Yellow, "#showtree - Shows the parse tree of expressions.");
+                    Console.WriteLine("     ");
+                    Utilities.WriteLineAsColor(ConsoleColor.Yellow, "#exit - Exits the REPL.");
+                    Console.WriteLine("     ");
+                    Utilities.WriteLineAsColor(ConsoleColor.Yellow, "#clear - Clears the REPL.");
+                    Console.WriteLine("     ");
+                    Utilities.WriteLineAsColor(ConsoleColor.Yellow, "#help - Displays this message.");
+
+                    continue;
+                }
 
                 SyntaxTree syntaxTree = SyntaxTree.Parse(line);
                 Binder binder = new Binder();
