@@ -62,7 +62,7 @@ namespace Nova.Tests
         }
 
         [Fact]
-        public void Lexer_LexOperatorsAndNumbers_AreNotEmpty()
+        public void Lexer_LexBinaryNumberExprs_AreNotEmpty()
         {
             var tokens = GetTokens("1 + 3 - 2 * 9 / 3 ");
             
@@ -70,7 +70,7 @@ namespace Nova.Tests
         }
 
         [Fact]
-        public void Lexer_LexBinaryExprs_AreCorrectTypeAndValue()
+        public void Lexer_LexBinaryNumberExprs_AreCorrectTypeAndValue()
         {
             var tokens = GetTokens("1 + 3 - 2 * 9 / 3 ");
 
@@ -95,6 +95,45 @@ namespace Nova.Tests
                             Assert.Equal(SyntaxKind.Slash, t.Kind);
                             break;
                     }
+                }
+            }
+        }
+
+        [Fact]
+        public void Lexer_LexBinaryBooleanExprs_AreNotEmpty()
+        {
+            var tokens = GetTokens("(true && true) || (false && true)");
+            
+            Assert.True(tokens.Any());
+        }
+
+        [Fact]
+        public void Lexer_LexBinaryBooleanExprs_AreCorrectTypeAndValue()
+        {
+            var tokens = GetTokens("(true && true) || (false && true)");
+
+            foreach (Token t in tokens)
+            {
+                switch (t.Text)
+                {
+                    case "(":
+                        Assert.Equal(SyntaxKind.OpenParen, t.Kind);
+                        break;
+                    case ")":
+                        Assert.Equal(SyntaxKind.CloseParen, t.Kind);
+                        break;
+                    case "true":
+                        Assert.Equal(SyntaxKind.True, t.Kind);
+                        break;
+                    case "false":
+                        Assert.Equal(SyntaxKind.False, t.Kind);
+                        break;
+                    case "&&":
+                        Assert.Equal(SyntaxKind.DoubleAmpersand, t.Kind);
+                        break;
+                    case "||":
+                        Assert.Equal(SyntaxKind.DoublePipe, t.Kind);
+                        break;
                 }
             }
         }
