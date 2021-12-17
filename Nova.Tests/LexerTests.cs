@@ -2,7 +2,6 @@
 using System.Linq;
 using Nova.CodeAnalysis.Syntax;
 using Xunit;
-using Xunit.Sdk;
 
 namespace Nova.Tests
 {
@@ -135,6 +134,55 @@ namespace Nova.Tests
                         Assert.Equal(SyntaxKind.DoublePipe, t.Kind);
                         break;
                 }
+            }
+        }
+
+        [Fact]
+        public void Lexer_LexUnaryNumberExprs_AreNotEmpty()
+        {
+            var tokens = GetTokens("-12");
+            
+            Assert.True(tokens.Any());
+        }
+
+        [Fact]
+        public void Lexer_LexUnaryNumberExprs_AreCorrectTypeAndValue()
+        {
+            var tokens = GetTokens("-12");
+
+            foreach (Token t in tokens)
+            {
+                if (int.TryParse(t.Text, out var _))
+                    Assert.Equal(SyntaxKind.Number, t.Kind);
+                
+                switch (t.Text)
+                {
+                    case "-":
+                        Assert.Equal(SyntaxKind.Minus, t.Kind);
+                        break;
+                }
+            }
+        }
+
+        [Fact]
+        public void Lexer_LexUnaryBooleanExprs_AreNotEmpty()
+        {
+            var tokens = GetTokens("!true");
+            
+            Assert.True(tokens.Any());
+        }
+
+        [Fact]
+        public void Lexer_LexUnaryBoolean_Exprs_AreCorrectTypeAndValue()
+        {
+            var tokens = GetTokens("!true");
+
+            foreach (Token t in tokens)
+            {
+                if (t.Text == "!")
+                    Assert.Equal(SyntaxKind.Bang, t.Kind);
+                else if (t.Text == "true")
+                    Assert.Equal(SyntaxKind.True, t.Kind);
             }
         }
     }
